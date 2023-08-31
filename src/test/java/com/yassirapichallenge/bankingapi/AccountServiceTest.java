@@ -1,5 +1,4 @@
 package com.yassirapichallenge.bankingapi;
-
 import com.yassirapichallenge.bankingapi.dto.AccountDTO;
 import com.yassirapichallenge.bankingapi.entity.Account;
 import com.yassirapichallenge.bankingapi.entity.Customer;
@@ -13,9 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
-
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -89,6 +86,4 @@ public class AccountServiceTest {
 
         assertThrows(EntityNotFoundException.class, () -> accountService.getAccountBalance(1L));
     }
-
-    // Diğer testler buraya eklenebilir
 }

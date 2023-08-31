@@ -12,22 +12,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @Service
 public class TransferService {
+
     private final AccountService accountService;
+
     private final TransferRepository transferRepository;
+
     private final ModelMapper modelMapper;
+
     public TransferService(AccountService accountService, TransferRepository transferRepository, ModelMapper modelMapper) {
+
         this.accountService = accountService;
         this.transferRepository = transferRepository;
         this.modelMapper = modelMapper;
     }
+
     @Transactional
     public TransferDTO createTransfer(TransferDTO transferDTO) throws InsufficientBalanceException {
+
         Account sourceAccount = accountService.getAccountById(transferDTO.getSourceAccountId());
         Account targetAccount = accountService.getAccountById(transferDTO.getTargetAccountId());
 
         if (sourceAccount.getBalance() >= transferDTO.getAmount()) {
+
             double amount = transferDTO.getAmount();
             sourceAccount.setBalance(sourceAccount.getBalance() - amount);
             targetAccount.setBalance(targetAccount.getBalance() + amount);
@@ -51,7 +60,9 @@ public class TransferService {
     public TransferDTO convertToTransferDTO(Transfer transfer) {
         return modelMapper.map(transfer, TransferDTO.class);
     }
+
     public List<TransferDTO> getTransferHistoryForAccount(Long accountId) {
+
         Optional<List<Transfer>> optionalTransfer = transferRepository.findBySourceAccountIdOrTargetAccountId(accountId, accountId);
 
         if (optionalTransfer.isPresent()) {

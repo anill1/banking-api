@@ -1,5 +1,4 @@
 package com.yassirapichallenge.bankingapi.exceptionhandler;
-
 import com.yassirapichallenge.bankingapi.dto.HttpErrorResponseDTO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
+
     @ExceptionHandler(value
             = {InsufficientBalanceException.class})
     protected ResponseEntity<Object> handleConflict(
@@ -23,6 +23,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(HttpErrorResponseDTO.builder().httpCode(HttpStatus.FORBIDDEN.value()).message(ex.getMessage()).build(), HttpStatus.OK);
     }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         Map<String, String> errors = new HashMap<>();
@@ -32,6 +33,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
             String message = error.getDefaultMessage();
             errors.put(fieldName, message);
         });
+
         return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
     }
 }

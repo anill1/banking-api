@@ -1,13 +1,14 @@
 package com.yassirapichallenge.bankingapi.service;
-import com.yassirapichallenge.bankingapi.dto.AccountDTO;
 import com.yassirapichallenge.bankingapi.dto.CustomerDTO;
 import com.yassirapichallenge.bankingapi.entity.Customer;
 import com.yassirapichallenge.bankingapi.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
+
 @Service
 public class CustomerService {
 
@@ -16,15 +17,13 @@ public class CustomerService {
     private final ModelMapper modelMapper;
 
     public CustomerService(CustomerRepository customerRepository, ModelMapper modelMapper) {
+
         this.customerRepository = customerRepository;
         this.modelMapper = modelMapper;
     }
 
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
-
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
+
         Customer customer = new Customer();
         customer.setName(customerDTO.getName());
 
@@ -44,7 +43,6 @@ public class CustomerService {
         {
             throw new EntityNotFoundException("Customer not found");
         }
-
     }
 
     public Optional<Customer> getCustomerEntityById(Long id) {
