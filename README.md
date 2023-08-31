@@ -1,5 +1,7 @@
 # banking-api - A spring boot project
 
+Required java version : 17
+
 Used Technologies java, spring boot, maven, jpa, hibernate, modelmapper, lombok, swagger
 
 Test cases path is : banking-api\src\test\java\com\yassirapichallenge\bankingapi
