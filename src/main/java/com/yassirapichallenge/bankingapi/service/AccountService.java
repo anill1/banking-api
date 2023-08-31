@@ -19,7 +19,7 @@ public class AccountService {
         this.modelMapper = modelMapper;
     }
     public AccountDTO createAccount(AccountDTO accountDTO) {
-        Optional<Customer> customerOptional = customerService.getCustomerById(accountDTO.getCustomerId());
+        Optional<Customer> customerOptional = customerService.getCustomerEntityById(accountDTO.getCustomerId());
 
         if (customerOptional.isPresent()) {
             Customer customer = customerOptional.get();

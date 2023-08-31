@@ -45,7 +45,7 @@ public class AccountServiceTest {
         accountDTO.setBalance(100.0);
 
         Customer customer = new Customer();
-        when(customerService.getCustomerById(1L)).thenReturn(Optional.of(customer));
+        when(customerService.getCustomerEntityById(1L)).thenReturn(Optional.of(customer));
 
         Account savedAccount = new Account();
         when(accountRepository.save(any(Account.class))).thenReturn(savedAccount);
@@ -64,7 +64,7 @@ public class AccountServiceTest {
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setCustomerId(1L);
 
-        when(customerService.getCustomerById(1L)).thenReturn(Optional.empty());
+        when(customerService.getCustomerEntityById(1L)).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> accountService.createAccount(accountDTO));
     }

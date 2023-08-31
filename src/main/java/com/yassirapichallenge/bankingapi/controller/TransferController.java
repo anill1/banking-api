@@ -12,7 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/transfer")
 public class TransferController {
+
     private final TransferService transferService;
+
     public TransferController(TransferService transferService) {
         this.transferService = transferService;
     }
@@ -24,6 +26,7 @@ public class TransferController {
     })
     @PostMapping("/create")
     public ResponseEntity<TransferDTO> createTransfer(@RequestBody TransferDTO transferDTO) throws InsufficientBalanceException {
+
         TransferDTO createdTransfer = transferService.createTransfer(transferDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTransfer);
     }
@@ -35,11 +38,11 @@ public class TransferController {
     })
     @GetMapping("/get-transfer-history/{accountId}")
     public ResponseEntity<List<TransferDTO>> getTransferHistoryForAccount(@PathVariable Long accountId) {
+
         List<TransferDTO> transfers = transferService.getTransferHistoryForAccount(accountId);
         if (transfers.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(transfers);
     }
 }

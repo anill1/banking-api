@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/account")
 public class AccountController {
+
     private final AccountService accountService;
+
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
+
     @Operation(summary = "Create a new account", description = "Create a new account with customer ID and balance value and return created account")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully saved"),
@@ -34,6 +37,7 @@ public class AccountController {
     })
     @GetMapping("/get-balance/{accountId}")
     public ResponseEntity<AccountDTO> getAccountBalance(@PathVariable Long accountId) {
+
         try {
             AccountDTO accountDTO = accountService.getAccountBalance(accountId);
             return ResponseEntity.ok(accountDTO);

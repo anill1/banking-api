@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
+
     private final CustomerService customerService;
+
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
     }
+
     @Operation(summary = "Create a new customer", description = "Returns the saved customer")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully saved"),
@@ -26,8 +29,9 @@ public class CustomerController {
             @ApiResponse(responseCode = "400", description = "Bad Request"),
     })
     @PostMapping("/create")
-    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
-        Customer createdCustomer = customerService.createCustomer(customerDTO);
+    public ResponseEntity<CustomerDTO> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
+
+        CustomerDTO createdCustomer = customerService.createCustomer(customerDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 }
